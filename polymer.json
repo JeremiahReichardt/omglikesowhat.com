@@ -1,0 +1,19 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/site-root.html",
+  "fragments": [
+    "src/pages/page-games.html"
+  ],
+  "sourceGlobs": [
+    ".htaccess",
+    "images/**/*",
+    "videos/**/*",
+    "content/**/*",
+    "src/pages/page-games.html",
+    "bower.json"
+  ],
+  "includeDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ]
+}

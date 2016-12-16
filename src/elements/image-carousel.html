@@ -1,0 +1,170 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation-behavior.html">
+<link rel="import" href="../../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="image-carousel">
+    <template>
+        <style include="shared-styles">
+            #slides {
+                @apply(--layout-horizontal);
+                overflow-x: scroll;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            :host ::content a, :host ::content img {
+                width:100%;
+                height: 100%;
+                flex:none;
+                -webkit-flex:none;
+                line-height: 0;
+                display: block;
+            }
+
+            #dots {
+                position: absolute;
+                bottom: -20px;
+                left: 0;
+                width: 100%;
+                height: 20px;
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                @apply(--layout-center-justified);
+            }
+
+            .dot {
+                margin-left: 5px;
+                margin-right: 5px;
+                background-color: #DDDDDD;
+                transition: background-color 0.25s ease-in-out;
+                border-radius: 50%;
+                width: 10px;
+                height: 10px;
+                cursor: pointer;
+            }
+
+            .selected {
+                background-color: #000000;
+            }
+        </style>
+        <div id="slides" on-scroll="_onScroll">
+            <content id="content"></content>
+        </div>
+        <div id="dots">
+            <template is="dom-repeat" items="[[_dots]]">
+                <div data-index$="[[index]]" class="dot" on-tap="_scrollToSlide"></div>
+            </template>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'image-carousel',
+
+            properties: {
+                _dots: {
+                    type: Array
+                },
+                _dotElements: {
+                    type: Array
+                },
+                _current: {
+                    type: Number,
+                    value: 0
+                },
+                animationConfig: {
+                    value: function () {
+                        return {
+                            'x-shift': {
+                                name: 'image-carousel',
+                                node: this.$.slides,
+                                xShift: 0
+                            }
+                        }
+                    }
+                }
+            },
+
+            listeners: {
+                'scroll': '_onScroll'
+            },
+
+            behaviors: [
+                Polymer.NeonAnimationRunnerBehavior,
+                Polymer.NeonAnimationBehavior
+            ],
+
+            configure: function(config) {
+                var node = config.node;
+                var start = node.scrollLeft;
+                var stop = config.xShift;
+                this._effect = new KeyframeEffect(node, [], this.timingFromConfig(config));
+                this._effect.onsample = function(timeFraction) {
+                    if( timeFraction ) {
+                        node.scrollLeft = timeFraction * (stop - start) + start;
+                    }
+                };
+                return this._effect;
+            },
+
+            attached: function (){
+                var ct = 0;
+                var _childNodes = Polymer.dom(this.$.content).getDistributedNodes();
+                for( var i in _childNodes ) {
+                    if( _childNodes[i].nodeType === Node.ELEMENT_NODE ) {
+                        ct++;
+                    }
+                }
+                this._dots = new Array( ct );
+                this.async( this._domReady );
+                window.addEventListener( 'resize', this._onWindowResize.bind( this ));
+            },
+
+            scrollToSlide: function( index ) {
+                this._current = parseInt( index );
+                this.animationConfig['x-shift'].xShift = parseInt( index ) * this.$.slides.offsetWidth;
+                this.playAnimation('x-shift');
+            },
+
+            _getNodes: function(_nodes) {
+                this.nodes = [];
+                for (var i = 0; i < _nodes.length; i++) {
+                    var html = _nodes[i].outerHTML;
+                    if (html && html.trim()) {
+                        this.nodes.push(html);
+                    }
+                }
+            },
+
+            _scrollToSlide: function( event ) {
+                this.scrollToSlide( event.currentTarget.getAttribute( 'data-index' ) );
+            },
+
+            _domReady: function() {
+                this._dotElements = Polymer.dom( this.$.dots ).querySelectorAll( '.dot' );
+                this._dotElements[0].classList.add( 'selected' );
+            },
+
+            _onScroll: function() {
+                this.debounce( '_onScroll', this._onScrollEnd.bind( this ), 50 );
+            },
+
+            _onScrollEnd: function() {
+                for( var i in this._dotElements ) {
+                    this.toggleClass( 'selected', false, this._dotElements[i] );
+                }
+                this.toggleClass( 'selected', true, this._dotElements[Math.round( this.$.slides.scrollLeft / this.$.slides.clientWidth )] );
+                this._current = Math.round( this.$.slides.scrollLeft / this.$.slides.clientWidth );
+
+            },
+
+            _onWindowResize: function() {
+                this.debounce( '_onScroll', this._onWindowResizeEnd.bind( this ), 50 );
+            },
+
+            _onWindowResizeEnd: function() {
+                this.scrollToSlide( this._current );
+            }
+        });
+    </script>
+</dom-module>

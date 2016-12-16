@@ -1,0 +1,13 @@
+{
+  "title": "Chevy Trax",
+  "subTitle": "Agency - Commonwealth McCann | Client - Chevy",
+  "body": "Commonwealth McCann partnered with ACNE LA to create an integrated 360º experience to highlight the key features of the brand new Chevy Trax. As the user scrubs through the experience, the camera spins around the Chevy Trax, anchoring at certain spots to show off the various features of the car. Upon traveling once around the exterior, the Trax’s back hatch opens up and the camera pulls inside to show off even the interior features. In order to showcase both the exterior and interior features within one continuous shot, ACNE LA had to shoot the background plate individually and then composite it in as a full CG car. Once shot, rendered, and composited, I then developed a fully responsive, cross browser module to fit seamlessly within Chevrolet.com.",
+  "videos": [
+    "/videos/frontend/chevy/chevy.mp4"
+  ],
+  "images": [
+    "/images/frontend/chevy/chevy1.jpg",
+    "/images/frontend/chevy/chevy2.jpg",
+    "/images/frontend/chevy/chevy3.jpg"
+  ]
+}

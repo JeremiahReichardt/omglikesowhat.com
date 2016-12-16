@@ -1,0 +1,34 @@
+{
+  "name": "dominos-weddingregistry",
+  "version": "0.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hookerz/942_Dominos_Wedding_Registry.git"
+  },
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/hookerz/942_Dominos_Wedding_Registry/issues/"
+  },
+  "engines": {
+    "node": ">=4.0"
+  },
+  "private": true,
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "css-slam": "^1.1.0",
+    "del": "^2.2.1",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-html-minifier": "^0.1.8",
+    "gulp-if": "^2.0.1",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-string-replace": "^0.2.0",
+    "gulp-uglify": "^2.0.0",
+    "merge-stream": "^1.0.0",
+    "path": "^0.12.7",
+    "plylog": "^0.4.0",
+    "polymer-build": "^0.4.0",
+    "vinyl-fs": "^2.4.4",
+    "yargs": "^6.0.0"
+  }
+}

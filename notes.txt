@@ -1,0 +1,16 @@
+image grid does not work on FF
+
+footer does not work in all browsers
+
+
+
+
+clean up build process - why move al the bower_components etc when not needed?
+
+lazy-load the pool gif ( with a custom element maybe if iron-image sizing cant be done )
+
+scroll to top when route/tail change
+
+404 fun :)
+
+add back in omg game ... maybe 404 as a game?

@@ -1,0 +1,41 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../behaviors/omg-transition.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="page-footer">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 200px;
+                background-color: rgba( 50, 50, 50, 0.05 );
+                z-index: 0;
+            }
+
+            footer {
+                margin: auto;
+                width: 90%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                -webkit-transform: translate(-50%, -50%);
+            }
+        </style>
+        <footer>
+            <h2>Contact</h2>
+            <h4>Email: jeremiah.reichardt@gmail.com</h4>
+            <h4><a href="https://www.linkedin.com/in/jeremyreichardt">linkedin.com/in/jeremyreichardt</a></h4>
+        </footer>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-footer',
+
+            behaviors: [omgAnimations]
+        });
+    </script>
+</dom-module>

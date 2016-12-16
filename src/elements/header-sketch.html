@@ -1,0 +1,123 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../behaviors/omg-transition.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="header-sketch">
+    <style include="shared-styles">
+        :host {
+            display: block;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        #copy, #LA {
+            display: inline-block;
+            vertical-align: top;
+            text-align: left;
+            width: 45%;
+            max-width: 600px;
+        }
+
+        #photo {
+            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            margin-left: 10%;
+        }
+
+        #copy {
+            position: relative;
+            z-index: 2;
+        }
+
+        #copy-wrap {
+            display: inline-block;
+            margin-top: -35px;
+            margin-left: 10%;
+        }
+
+        p {
+            padding: 10px;
+            background-color: rgba( 255, 255, 255, 0.90 );
+            box-shadow: 0 3px 9px -4px rgba(0,0,0,0.1);
+        }
+
+        #LA {
+            transition: opacity 0.25s ease-in-out;
+            position: relative;
+            z-index: 0;
+            box-shadow: 0 3px 9px -4px rgba(0,0,0,1.2);
+            height: 400px;
+            opacity: 0.75;
+            margin-left: -150px;
+            width: 50%;
+            margin-right: 50px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            :host {
+                text-align: center;
+            }
+
+            #copy {
+                margin-left: 40px;
+                padding-right: 80px;
+            }
+
+            #copy-wrap {
+                margin-left: 0;
+            }
+
+            #copy, #LA {
+                width: 100%;
+            }
+
+            #LA {
+                margin-left: 0;
+                margin-right: 0;
+                width: 100%;
+            }
+
+            p {
+                box-shadow: none;
+            }
+        }
+    </style>
+    <template>
+        <header>
+            <div id="copy">
+                <img id="photo" src="/images/jeremiah-reichardt.jpg">
+                <div id="copy-wrap">
+                    <h1>Jeremiah Reichardt</h1>
+                    <h3>Sr. Frontend / Javascript Developer</h3>
+                    <p>
+                        I have a passion for making great designs come to life on screen,
+                        ensuring they look and work great on all devices, optimizing load times, and overall making sure end user experience is the best it can be.
+                        With 10+ years developing sites, single-page-applications, and games for some of the greatest brands and agencies around.
+                        I would love to take what I've learned and help you, your team, and product be more awesome.
+                    </p>
+                </div>
+            </div>
+            <img id="LA" src="../../images/home/LA.jpg">
+        </header>
+    </template>
+    <script>
+        Polymer({
+            is: 'header-sketch',
+
+            properties: {
+                _imageLoadCount: {
+                    type: Number,
+                    value: 0
+                },
+                _imageLoadTotal: {
+                    type: Number,
+                    value: 0
+                }
+            },
+
+            behaviors: [omgAnimations]
+        });
+    </script>
+</dom-module>

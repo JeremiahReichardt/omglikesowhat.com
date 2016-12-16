@@ -1,0 +1,79 @@
+<script>
+    omgAnimations = {
+        properties: {
+            _imageLoadCount: {
+                type: Number,
+                value: 0
+            },
+            _imageLoadTotal: {
+                type: Number,
+                value: 0
+            },
+            _ironImageLoadCount: {
+                type: Number,
+                value: 0
+            },
+            _ironImageLoadTotal: {
+                type: Number,
+                value: 0
+            }
+        },
+
+        attached: function() {
+
+            this.style.opacity = 0;
+            this.style.transitionProperty = ['opacity'];
+            this.style.transitionDuration = '0.25s';
+            this.style.transitionTimingFunction = 'ease-in-out';
+
+            // preload img
+            var images = Polymer.dom( this ).querySelectorAll( 'img' );
+            images = images.concat( Polymer.dom( this.root ).querySelectorAll( 'img' ) );
+            this._imageLoadTotal = images.length;
+            for( var i = 0; i < images.length; i++ ) {
+                var image = new Image();
+                image.addEventListener( 'load', this._onImageLoad.bind( this ) );
+                image.src = images[ i ].src;
+            }
+
+            // poll for iron-image loads
+            var ironImages = Polymer.dom( this ).querySelectorAll( 'iron-image' );
+            ironImages = ironImages.concat( Polymer.dom( this.root ).querySelectorAll( 'iron-image' ) );
+            this._ironImageLoadTotal = ironImages.length;
+            if ( ironImages ) {
+                window.setTimeout( this._pollForIronImages.bind( this ), 300 );
+            }
+            if( this._imageLoadTotal === 0 ) {
+                this.async( this._complete, 100 );
+            }
+        },
+
+        _onImageLoad: function() {
+            this._imageLoadCount++;
+            if( this._imageLoadCount === this._imageLoadTotal ) {
+                this._complete();
+            }
+        },
+
+        _complete: function() {
+            if( this._ironImageLoadCount === this._ironImageLoadTotal ) {
+                if( this._imageLoadCount === this._imageLoadTotal ) {
+                    this.style.opacity = 1;
+                }
+            }
+        },
+
+        _pollForIronImages: function() {
+            var ironImages = Polymer.dom( this ).querySelectorAll( 'iron-image' );
+            ironImages = ironImages.concat( Polymer.dom( this.root ).querySelectorAll( 'iron-image' ) );
+            for ( var i  = 0; i < ironImages.length; i++ ) {
+                this._ironImageLoadCount++;
+            }
+            if( this._ironImageLoadCount === this._ironImageLoadTotal ) {
+                    this._complete();
+            } else {
+                window.setTimeout( this._pollForIronImages.bind( this ), 300 );
+            }
+        }
+    };
+</script>

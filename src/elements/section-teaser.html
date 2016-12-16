@@ -1,0 +1,122 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../behaviors/omg-transition.html">
+<link rel="import" href="../shared-styles.html">
+
+<!--
+classes this element internally supports are
+reverse, full, copy-top and copy-bottom
+-->
+
+<dom-module id="section-teaser">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+            }
+
+            section {
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                @apply(--layout-center-justified);
+            }
+
+            #copy {
+                position: relative;
+                z-index: 1;
+                width: 35%;
+                margin-right: 25px;
+                margin-left: 25px;
+            }
+
+            #media {
+                position: relative;
+                z-index: 0;
+                width: 50%;
+                margin-right: 25px;
+                margin-left: 25px;
+            }
+
+            :host(.copy-bottom) section {
+                @apply(--layout-end);
+            }
+
+            :host(.copy-top) section {
+                @apply(--layout-start);
+            }
+
+            :host(.reverse) section {
+                @apply(--layout-horizontal-reverse);
+            }
+
+            :host(.full) section {
+                @apply(--layout-vertical);
+            }
+
+            :host(.full) #copy {
+                width: 90%;
+            }
+
+            :host(.full) #media {
+                width: 90%;
+                text-align: center;
+            }
+
+            @media only screen and (max-width: 768px) {
+                section, :host(.reverse) section {
+                    @apply(--layout-vertical);
+                }
+
+                #media, :host(.reverse) :host(.reverse) #media {
+                    width: 100%;
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                #copy {
+                    width: 90%;
+                    margin-left: 5%;
+                }
+            }
+
+        </style>
+        <section>
+            <div id="copy">
+                <h3>[[title]]</h3>
+                <h5>[[sub-title]]</h5>
+                <p id="body"></p>
+            </div>
+            <div id="media">
+                <content></content>
+            </div>
+        </section>
+    </template>
+    <script>
+        Polymer({
+            is: 'section-teaser',
+
+            properties: {
+                title: {
+                    type: String,
+                    reflectToAttribute: true
+                },
+                subTitle: {
+                    type: String,
+                    reflectToAttribute: true
+                },
+                body: {
+                    type: String,
+                    reflectToAttribute: true
+                }
+            },
+
+            behaviors: [omgAnimations],
+
+            ready: function() {
+                if ( this.body ) {
+                    this.$.body.innerHTML = this.body;
+                }
+            }
+        });
+    </script>
+</dom-module>

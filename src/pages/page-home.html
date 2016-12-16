@@ -1,0 +1,176 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../elements/header-sketch.html">
+<link rel="import" href="../elements/section-teaser.html">
+<link rel="import" href="../elements/image-carousel.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="page-home">
+    <template>
+        <style include="shared-styles">
+            :host {
+                margin-bottom: 100vh !important;
+                position: relative !important;
+            }
+
+            #node {
+                margin-bottom: 80px;
+            }
+
+            #pool iron-image {
+                box-shadow: 0 1px 9px -2px rgba(0,0,0,1);
+                width: 100%;
+                height: 400px;
+                margin-bottom: 25px;
+            }
+
+            #background-sketch {
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: calc( 100vh - 200px );
+                background-color: #00b0ff;
+                background-image: url('../../images/home/pattern.png');
+            }
+
+            #sketch-hider {
+                z-index: 2;
+                position: relative;
+                background-color: #FFFFFF;
+            }
+
+            #sketch-me {
+                text-align: center;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate( -50%, -50% );
+                -webkit-transform: translate( -50%, -50% );
+            }
+
+            #sketch-me img {
+                width: 140px;
+                height: 140px;
+                border-radius: 50%;
+                box-shadow: 0px 3px 7px rgba(0, 0, 0, 1);
+            }
+
+            #sketch-name {
+                width: 100%;
+                text-shadow: 0px 3px 7px rgba(0, 0, 0, 1);
+            }
+
+            #sketch-name a {
+                color: #FFFFFF;
+            }
+
+            @media only screen and (max-width: 768px) {
+                #pool iron-image {
+                    height: 200px;
+                }
+
+                #pool {
+                    margin-bottom: 0;
+                }
+            }
+        </style>
+
+        <div id="sketch-hider">
+        <main>
+            <header>
+                <header-sketch id="header"></header-sketch>
+            </header>
+            <section-teaser
+                    id="frontend"
+                    class="reverse"
+                    title="Frontend / Responsive Development"
+                    sub-title="HTML5 / CSS3 / Javascript"
+                    body="
+                    It's what I love the most, creating awesome sites and experiences for the web.
+                    In the past I've used the following technologies to do so.
+                    <ul>
+                    <li><a href='https://www.polymer-project.org/1.0/' target='_blank'>Polymer</a></li>
+                    <li><a href='https://vuejs.org/' target='_blank'>Vue.js</a></li>
+                    <li><a href='http://backbonejs.org/' target='_blan'>Backbone.js</a> with <a href='https://jquery.com/' target='_blank'>jQuery</a></li>
+                    <li><a href='http://handlebarsjs.com/' target='_blank'>Handlebars.js</a> and <a href='http://underscorejs.org/' target='_blank'>Underscore.js</a> templates
+                    <li><a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a> and <a href='http://responsivebp.com/' target='_blank'>ResponsiveBP</a> for prototyping and internal tools</li>
+                    <li>CSS Preprocessors including <a href='http://sass-lang.com/' target='_blank'>SASS</a> and <a href='http://stylus-lang.com/' target='_blank'>Stylus</a></li>
+                    <li>HTML5 elements including audio, video and canvas</li>
+                    <li><a href='https://greensock.com/gsap' target='_blank'>GSAP</a> animation</li>
+                    <li><a href='http://dmitrybaranovskiy.github.io/raphael/' target='_blank'>Raphaël</a></li>
+                    <li><a href='https://developers.google.com/chart/' target='_blank'>Google Charts</a></li>
+                    <li><a href='https://threejs.org/' target='_blank'>Three.js</a>, <a href='http://stack.gl/' target='_blank'>Stack.gl</a>, and raw <a href='https://www.khronos.org/webgl/' target='_blank'>WEBGL</a> creating a custom rendering pipeline</li>
+                    </ul>
+                    And I am happy to use any framework or tech stack - they are not in short supply these days
+                    ">
+                <image-carousel>
+                    <a href="/frontend/gap"><img src="../../images/frontend/gap/gap.jpg"></a>
+                    <a href="/frontend/hello-v"><img src="../../images/frontend/hello-v/hello-v.jpg"></a>
+                    <a href="/frontend/subaru"><img src="../../images/frontend/subaru/subaru.jpg"></a>
+                    <a href="/frontend/fruit-of-the-loom"><img src="../../images/frontend/fruit-of-the-loom/fruit-of-the-loom.jpg"></a>
+                    <a href="/frontend/chevy"><img src="../../images/frontend/chevy/chevy.jpg"></a>
+                    <a href="/frontend/guggenheim"><img src="../../images/frontend/guggenheim/guggenheim.jpg"></a>
+                    <a href="/frontend/youtube"><img src="../../images/frontend/youtube/youtube.jpg"></a>
+                </image-carousel>
+            </section-teaser>
+
+            <section-teaser
+                    id="node"
+                    title="Node.js Development"
+                    body="
+                    I have experience developing Node.js desktop applications using <a href='http://electron.atom.io/' target='_blank'>Electron</a> and <a href='https://nwjs.io/' target='_blank'>NWJS <a>.
+                    In the past I have built and maintained internal tools using Electron to automate various tasks for non-technical
+                    employees.
+                    <br>
+                    <br>
+                    As a fun side project I forked the <a href='https://github.com/processing/p5.js-editor' target='_blank'>p5.js code editor</a> p5.js code editor</a> to allow for creative coding
+                    to be done along side a users 'creative sketch' with live reload using <a href='https://www.browsersync.io/' target='_blank'>Browsersync</a>. I also added support for <a href='http://browserify.org/' target='_blank''>Browserify</a> so more modular code could be written and bundled.
+                    More info can be found <a href='http://jeremiahreichardt.github.io/p5.js-editor/' target='_blank'>here</a>
+                    ">
+                <img src="../../images/node/p5js-editor.png">
+            </section-teaser>
+
+            <section-teaser
+                    id="pool"
+                    class="full">
+                <iron-image preload fade sizing="cover" src="../../images/home/pool.gif"></iron-image>
+            </section-teaser>
+
+            <section-teaser
+                    id="games"
+                    class="reverse copy-top"
+                    title="Game Development"
+                    sub-title="Flash AS3 / HAXE / OpenFl / Others"
+                    body="
+                    While I no longer make games professionally the projects that I have done in the past still hold a special place in my heart️.<br>I sill noodle around with game ideas for my children on the side using <a href='https://libgdx.badlogicgames.com/' targte='_blank'>libgdx</a> and <a href='http://overlap2d.com/' targte='_blank'>overlap2d</a> when I can.
+                    ">
+                <div class="grid">
+                    <a href="/games"><img src="../../images/games/outernaughts/square.jpg"></a>
+                    <a href="/games"><img src="../../images/games/BurgerKing-CruzForVictory/square.jpg"></a>
+                    <a href="/games"><img src="../../images/games/BurgerKing-ShootToMatch/square.jpg"></a>
+                    <a href="/games"><img src="../../images/games/BurgerKing-SpongeBobSquarePants/square.jpg"></a>
+                    <a href="/games"><img src="../../images/games/BurgerKing-StarTrek/square.jpg"></a>
+                    <a href="/games"><img src="../../images/games/BurgerKing-Transformers/square.jpg"></a>
+                    <a href="/games"><img src="../../images/games/Hasbro-Connect4/square.jpg"></a>
+                    <a href="/games"><img src="../../images/games/omg/omg.jpg"></a>
+                </div>
+            </section-teaser>
+        </main>
+        </div>
+
+        <div id="background-sketch">
+            <div id="sketch-me">
+                <img src="../../images/jeremiah-reichardt.jpg">
+                <h1 id="sketch-name"><a href="http://omglikesowhat.com/game/" target="_blank">Lets play a game</a></h1>
+            </div>
+        </div>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'page-home'
+        });
+    </script>
+</dom-module>

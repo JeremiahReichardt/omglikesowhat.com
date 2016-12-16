@@ -1,0 +1,10 @@
+{
+  "title": "Hello V",
+  "body": "A single page showing off the awesome product V - 'A VR DASHBOARD FOR THAT NEVER LEAVES YOUR SIDE'.<br><a href='http://www.hellov.io'>hellov.io</a>",
+  "images": [
+    "/images/frontend/hello-v/hello-v-1.jpg",
+    "/images/frontend/hello-v/hello-v-2.jpg",
+    "/images/frontend/hello-v/hello-v-3.jpg",
+    "/images/frontend/hello-v/hello-v-4.jpg"
+  ]
+}
